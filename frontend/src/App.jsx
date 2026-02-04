@@ -1,13 +1,19 @@
-import { SignInButton } from "@clerk/clerk-react"
-import { Route, Router, Routes } from "react-router"
-import Navbar from "./components/Navbar.jsx"
-import HomePage from "./pages/HomePage.jsx"
-import ProductPage from "./pages/ProductPage.jsx"
-import ProfilePage from "./pages/ProfilePage.jsx"
-import CreatePage from "./pages/CreatePage.jsx"
-import EditProductPage from "./pages/EditProductPage.jsx"
+import { SignInButton } from "@clerk/clerk-react";
+import { Route, Router, Routes } from "react-router";
+import Navbar from "./components/Navbar.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import CreatePage from "./pages/CreatePage.jsx";
+import EditProductPage from "./pages/EditProductPage.jsx";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import useAuthReq from "./hooks/useAuthReq.js";
+import useUserSync from "./hooks/useUserSync.js";
 
 function App() {
+  const { isClerkLoaded, isSignedIn } = useAuthReq();
+  useUserSync(isSignedIn);
+  if (!isClerkLoaded)  return null;
   return (
     <div className="min-h-screen bg-base-100">
       <Navbar />
