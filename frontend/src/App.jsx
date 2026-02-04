@@ -11,8 +11,8 @@ import useAuthReq from "./hooks/useAuthReq.js";
 import useUserSync from "./hooks/useUserSync.js";
 
 function App() {
-  const { isClerkLoaded, isSignedIn } = useAuthReq();
-  useUserSync(isSignedIn);
+  const { isClerkLoaded} = useAuthReq();
+  useUserSync();
   if (!isClerkLoaded)  return null;
   return (
     <div className="min-h-screen bg-base-100">
